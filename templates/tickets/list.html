@@ -1,1 +1,68 @@
-tickets list
+{% extends 'base.html' %}
+
+{% block js %}
+<script type="text/javascript">
+  var app = angular.module('app', []);
+
+  function AppController($scope){
+    $scope.tickets = [
+      {
+        'code':'code',
+        'title':'title',
+        'description':'description',
+        'current_status':'current_status',
+        'created_at':'created_at',
+        'updated_at':'updated_at'
+      }
+    ]
+  };
+
+  app.controller('AppController', AppController);
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 offset-md-4 mt-4">
+
+        <div ng-app="app" ng-controller="AppController">
+          <div class="ticket-list">
+
+            {% verbatim %}
+            <div class="card bg-light mb-3" ng-repeat="ticket in tickets">
+              <div class="card-header">{{ ticket.code }}</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ ticket.title }}</h5>
+                <p class="card-text">
+                  <ul>
+                    <li>
+                      {{ ticket.description }}
+                    </li>
+                    <li>
+                      {{ ticket.current_status }}
+                    </li>
+                    <li>
+                      {{ ticket.created_at }}
+                    </li>
+                    <li>
+                      {{ ticket.updated_at }}
+                    </li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            {% endverbatim %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+{% endblock %}
