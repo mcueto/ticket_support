@@ -1,0 +1,5 @@
+export POSTGRES_NAME='tiketo'
+export POSTGRES_USER='tiketo'
+export POSTGRES_PASSWORD='tiketo'
+export POSTGRES_HOST='127.0.0.1'
+export POSTGRES_PORT='5432'
