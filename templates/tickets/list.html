@@ -26,13 +26,18 @@
 
     this.$onInit = function() {
       store.findAll('ticket').then(function(data){
+
+        for(var i=0; i<data.length; i++){
+          data[i].created_at = moment(data[i].created_at).fromNow();
+        }
+
         $scope.tickets = data;
         $scope.$apply();
       });
     };
   };
 
-  app.controller('AppController', AppController, {tickets:'='});
+  app.controller('AppController', AppController);
 
 </script>
 {% endblock %}
@@ -64,6 +69,7 @@
             {% verbatim %}
             <div class="card bg-light mb-4" ng-repeat="ticket in tickets">
               <div class="card-header">{{ ticket.code }}</div>
+
               <div class="card-body">
                 <h5 class="card-title">{{ ticket.title }}</h5>
                 <p class="card-text">
@@ -74,14 +80,12 @@
                     <li>
                       {{ ticket.current_status }}
                     </li>
-                    <li>
-                      {{ ticket.created_at }}
-                    </li>
-                    <li>
-                      {{ ticket.updated_at }}
-                    </li>
                   </ul>
                 </p>
+              </div>
+
+              <div class="card-footer">
+                {{ ticket.created_at }}
               </div>
             </div>
             {% endverbatim %}
