@@ -4,14 +4,17 @@ from models import (
 )
 
 
+TICKET_FIELDS = (
+    'code',
+    'title',
+    'description',
+    'current_status',
+    'created_at',
+    # 'updated_at',
+)
+
+
 class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
-        fields = (
-            'code',
-            'title',
-            'description',
-            'current_status',
-            'created_at',
-            'updated_at',
-        )
+        fields = TICKET_FIELDS
