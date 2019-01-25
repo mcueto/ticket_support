@@ -34,9 +34,15 @@
         </h1>
 
         <div class="text-right mb-4">
+          {% if perms.tickets.add_ticket %}
           <a class="btn btn-primary" href="{% url 'tickets_create' %}">
             new ticket
           </a>
+          {% else %}
+          <a class="btn btn-primary disabled">
+            new ticket
+          </a>
+          {% endif %}
         </div>
 
         <div ng-app="app" ng-controller="AppController">
