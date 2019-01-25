@@ -51,4 +51,4 @@ class Ticket(models.Model):
 
     def __str__(self):
         """Return the class instance item name in django admin."""
-        return str(self.name)+" - "+str(self.created_at)
+        return str(self.title)+" - "+str(self.created_at)
