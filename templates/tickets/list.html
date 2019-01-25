@@ -2,29 +2,42 @@
 
 {% block js %}
 <script type="text/javascript">
+  // Create a store
+  const store = new JSData.DataStore();
+
+  // Create an adapter
+  const httpAdapter = new JSDataHttp.HttpAdapter({
+    // Instead of using relative urls, force absolute
+    // urls using this basePath
+    basePath: 'http://localhost:8000/tickets/api/'
+  });
+
+  store.registerAdapter('http', httpAdapter, { 'default': true });
+
+  store.defineMapper('ticket', {
+  	endpoint: 'tickets/'
+  });
+
+
   var app = angular.module('app', []);
 
   function AppController($scope){
-    $scope.tickets = [
-      {
-        'code':'code',
-        'title':'title',
-        'description':'description',
-        'current_status':'current_status',
-        'created_at':'created_at',
-        'updated_at':'updated_at'
-      }
-    ]
+    $scope.tickets = [];
+
+    this.$onInit = function() {
+      store.findAll('ticket').then(function(data){
+        $scope.tickets = data;
+        $scope.$apply();
+      });
+    };
   };
 
-  app.controller('AppController', AppController);
+  app.controller('AppController', AppController, {tickets:'='});
 
 </script>
 {% endblock %}
 
 {% block content %}
-
-
   <div class="container">
     <div class="row">
       <div class="col-md-4 offset-md-4 mt-4">
