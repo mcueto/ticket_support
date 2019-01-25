@@ -23,9 +23,17 @@
 
   function AppController($scope){
     $scope.tickets = [];
+    $scope.filters = {
+      'code': '',
+      'title': '',
+      'description': '',
+      'current_status': '',
+      'created_at': ''
+    };
 
-    this.$onInit = function() {
-      store.findAll('ticket').then(function(data){
+    $scope.updateTickets = function() {
+
+      store.findAll('ticket', $scope.filters).then(function(data){
 
         for(var i=0; i<data.length; i++){
           data[i].created_at = moment(data[i].created_at).fromNow();
@@ -35,6 +43,10 @@
         $scope.$apply();
       });
     };
+
+    this.$onInit = function() {
+      $scope.updateTickets();
+    };
   };
 
   app.controller('AppController', AppController);
@@ -43,9 +55,53 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container">
+  <div class="container" ng-app="app" ng-controller="AppController">
     <div class="row">
-      <div class="col-md-4 offset-md-4 mt-4">
+      <div class="col-md-4 mt-4">
+        {% verbatim %}
+        <div class="form-group">
+
+          <!-- code -->
+          <label for="input_code">
+            code
+          </label>
+          <input type="text" class="form-control" id="input_code" placeholder="Enter code" ng-model="filters.code">
+
+          <!-- title -->
+          <label for="input_title">
+            title
+          </label>
+          <input type="text" class="form-control" id="input_title" placeholder="Enter title" ng-model="filters.title">
+
+          <!-- description -->
+          <label for="input_description">
+            description
+          </label>
+          <input type="text" class="form-control" id="input_description" placeholder="Enter description" ng-model="filters.description">
+
+          <!-- current_status -->
+          <label for="input_current_status">
+            current_status
+          </label>
+
+          <input type="text" class="form-control" id="input_current_status" placeholder="Enter current_status" ng-model="filters.current_status">
+
+          <!-- created_at -->
+          <label for="input_created_at">
+            created_at
+          </label>
+          <input type="text" class="form-control" id="input_created_at" placeholder="Enter created_at" ng-model="filters.created_at">
+
+        </div>
+
+        <button class="btn btn-secondary" ng-click="updateTickets()">
+          Filter
+        </button>
+
+        {% endverbatim %}
+      </div>
+
+      <div class="col-md-4 mt-4">
 
         <h1 class="text-center">
           Ticket list
@@ -63,7 +119,7 @@
           {% endif %}
         </div>
 
-        <div ng-app="app" ng-controller="AppController">
+        <div>
           <div class="ticket-list">
 
             {% verbatim %}
@@ -84,7 +140,7 @@
                 </p>
               </div>
 
-              <div class="card-footer">
+              <div class="card-footer text-right">
                 {{ ticket.created_at }}
               </div>
             </div>
