@@ -7,4 +7,24 @@ from models import (
 )
 
 
-admin.site.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = (
+        'code',
+        'title',
+        'current_status',
+        'created_at'
+    )
+    list_filter = (
+        'code',
+        'current_status',
+    )
+    search_fields = (
+        'code',
+        'title',
+        'description',
+        'current_status',
+        'created_at',
+    )
+
+
+admin.site.register(Ticket, TicketAdmin)
