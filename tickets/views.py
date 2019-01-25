@@ -14,6 +14,9 @@ from rest_framework import viewsets
 from models import (
     Ticket,
 )
+from filters import (
+    TicketFilter,
+)
 from serializers import (
     TicketSerializer,
     TICKET_FIELDS,
@@ -33,8 +36,6 @@ class TicketCreateView(PermissionRequiredMixin, CreateView):
 
 
 class TicketViewSet(viewsets.ModelViewSet):
-    """
-    A viewset for viewing and editing user instances.
-    """
     serializer_class = TicketSerializer
     queryset = Ticket.objects.all()
+    filter_class = TicketFilter
