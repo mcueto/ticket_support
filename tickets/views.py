@@ -43,5 +43,5 @@ class TicketCreateView(PermissionRequiredMixin, CreateView):
 
 class TicketViewSet(viewsets.ModelViewSet):
     serializer_class = TicketSerializer
-    queryset = Ticket.objects.all()
+    queryset = Ticket.objects.all().order_by('-created_at')
     filter_class = TicketFilter
