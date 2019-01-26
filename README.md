@@ -1,21 +1,5 @@
 # Ticket Support System
 
-## Create a postgres instance
-If you have not a running postgres instance you can create a Docker container with the following code:
-
-```bash
-docker run --name tiketo -e POSTGRES_USER=tiketo  -p 5432:5432 -d postgres:10
-```
-
-This will create a PostgreSQL 10 instance based on the data contained in setenvvars.sh file
-``` shell
-export POSTGRES_NAME='tiketo'
-export POSTGRES_USER='tiketo'
-export POSTGRES_PASSWORD='tiketo'
-export POSTGRES_HOST='127.0.0.1'
-export POSTGRES_PORT='5432'
-```
-
 ## Run on your local machine(development)
 Create a virtualenv
 ``` shell
@@ -32,6 +16,11 @@ Install dependencies
 pip install -r requirements.txt
 ```
 
+Configure your database
+``` shell
+docker run --name tiketo -e POSTGRES_USER=tiketo  -p 5432:5432 -d postgres:10
+```
+
 Apply migrations
 ``` shell
 python manage.py migrate
@@ -45,4 +34,22 @@ python manage.py createsuperuser
 Run
 ``` shell
 python manage.py runserver
+```
+
+Now you can visit http://127.0.0.1:8000 and log in
+
+## Configure your database
+If you have not a running postgres instance you can create a Docker container with the following code:
+
+```bash
+docker run --name tiketo -e POSTGRES_USER=tiketo  -p 5432:5432 -d postgres:10
+```
+
+This will create a PostgreSQL 10 instance based on the data contained in setenvvars.sh file
+``` shell
+export POSTGRES_NAME='tiketo'
+export POSTGRES_USER='tiketo'
+export POSTGRES_PASSWORD='tiketo'
+export POSTGRES_HOST='127.0.0.1'
+export POSTGRES_PORT='5432'
 ```
