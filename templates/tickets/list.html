@@ -33,7 +33,7 @@
 
     $scope.updateTickets = function() {
 
-      store.findAll('ticket', $scope.filters).then(function(data){
+      store.findAll('ticket', $scope.filters, {'force': true}).then(function(data){
 
         for(var i=0; i<data.length; i++){
           data[i].created_at = moment(data[i].created_at).fromNow();
