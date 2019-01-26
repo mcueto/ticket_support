@@ -1,6 +1,16 @@
 # Ticket Support System
 
 ## Run on your local machine(development)
+Clone the repo
+``` shell
+git clone https://github.com/mcueto/ticket_support.git
+```
+
+Get into the project folder
+``` shell
+cd ticket_support
+```
+
 Create a virtualenv
 ``` shell
 mkvirtualenv tiketo
