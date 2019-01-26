@@ -26,6 +26,12 @@ from serializers import (
 class TicketListView(LoginRequiredMixin, TemplateView):
     template_name = 'tickets/list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(TicketListView, self).get_context_data(**kwargs)
+
+        context['api_base_url'] = self.request.build_absolute_uri('api')
+        return context
+
 
 class TicketCreateView(PermissionRequiredMixin, CreateView):
     model = Ticket

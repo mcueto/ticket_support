@@ -9,7 +9,7 @@
   const httpAdapter = new JSDataHttp.HttpAdapter({
     // Instead of using relative urls, force absolute
     // urls using this basePath
-    basePath: 'http://localhost:8000/tickets/api/'
+    basePath: '{{ api_base_url | safe }}'
   });
 
   store.registerAdapter('http', httpAdapter, { 'default': true });
