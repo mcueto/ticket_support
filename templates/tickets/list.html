@@ -94,7 +94,7 @@
 
         </div>
 
-        <button class="btn btn-secondary" ng-click="updateTickets()">
+        <button class="btn btn-info" ng-click="updateTickets()">
           Filter
         </button>
 
@@ -124,19 +124,17 @@
 
             {% verbatim %}
             <div class="card bg-light mb-4" ng-repeat="ticket in tickets">
-              <div class="card-header">{{ ticket.code }}</div>
+              <div class="card-header">
+                {{ ticket.code }}
+                <span class="badge badge-info">
+                  {{ ticket.current_status }}
+                </span>
+              </div>
 
               <div class="card-body">
                 <h5 class="card-title">{{ ticket.title }}</h5>
                 <p class="card-text">
-                  <ul>
-                    <li>
-                      {{ ticket.description }}
-                    </li>
-                    <li>
-                      {{ ticket.current_status }}
-                    </li>
-                  </ul>
+                  {{ ticket.description }}
                 </p>
               </div>
 
